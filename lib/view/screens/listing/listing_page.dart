@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../view_model/listing_view_model.dart';
+
 
 class ListingPage extends StatefulWidget {
   const ListingPage({super.key});
@@ -8,11 +11,14 @@ class ListingPage extends StatefulWidget {
 }
 
 class _ListingPageState extends State<ListingPage> {
-    Widget _buildList(){
-        return ListView.builder(itemBuilder: (context, position){
-          
-        });
-    }
+
+  ListingViewModel listingViewModel = ListingViewModel();
+
+  @override
+  void initState() {
+    listingViewModel.getProducts();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,14 @@ class _ListingPageState extends State<ListingPage> {
             centerTitle: true,
             backgroundColor: Theme.of(context).primaryColor,
         ),
-        body: _buildList(),
+        body: ChangeNotifierProvider<ListingViewModel>(
+          create: (BuildContext context) => listingViewModel,
+          child: Consumer<ListingViewModel>(
+              builder: (context, value, _){
+                return Container();
+              },
+            )
+        )
     );
   }
 }
