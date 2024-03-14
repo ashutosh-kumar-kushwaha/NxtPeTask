@@ -15,6 +15,15 @@ class Routes{
       case RoutesName.details:
         return MaterialPageRoute(builder: (BuildContext context) => const DetailsPage());
 
+      default:
+        return MaterialPageRoute(builder: (_){
+          return const Scaffold(
+            body: Center(
+                child: Text("No Route Defined"),
+              ),
+          );
+        });
+
     }
 
   } 

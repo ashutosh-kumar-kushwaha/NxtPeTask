@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:next_pe_task/presentation/ui/listing/listing_page.dart';
+import 'package:next_pe_task/presentation/ui/routes.dart';
+import 'package:next_pe_task/presentation/ui/routes_name.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.purple[900]),
-      home: const HomePage(),
+      initialRoute: RoutesName.listing,
+      onGenerateRoute: Routes.generateRoute,
     );
   }
 }
