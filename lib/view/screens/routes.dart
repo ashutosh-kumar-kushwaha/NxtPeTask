@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:next_pe_task/presentation/ui/details/details_page.dart';
-import 'package:next_pe_task/presentation/ui/listing/listing_page.dart';
-import 'package:next_pe_task/presentation/ui/routes_name.dart';
+import 'package:next_pe_task/view/screens/details/details_page.dart';
+import 'package:next_pe_task/view/screens/listing/listing_page.dart';
+import 'package:next_pe_task/view/screens/routes_name.dart';
 
 class Routes{
 
