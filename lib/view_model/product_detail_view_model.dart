@@ -15,7 +15,6 @@ class ProductDetailsViewModel with ChangeNotifier {
   }
 
   Future<void> getProductDetails(String id) async {
-    print(id);
     setProducts(ApiResponse.loading());
     _productDetailsRepository.getProductDetails(id).then((value){
       setProducts(ApiResponse.success(value));

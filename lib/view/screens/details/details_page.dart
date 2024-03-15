@@ -40,7 +40,11 @@ class _DetailsPageState extends State<DetailsPage> {
                         centerTitle: true,
                         backgroundColor: Theme.of(context).primaryColor,
                       ),
-                      body: Column()
+                      body: Column(
+                        children: [
+                          Image.network(value.product.data?.images![0]?? "")
+                        ],
+                      )
                     );
                   case Status.ERROR:
                     return Text(value.product.message.toString());
