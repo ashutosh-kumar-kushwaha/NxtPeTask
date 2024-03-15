@@ -50,6 +50,8 @@ class _DetailsPageState extends State<DetailsPage> {
                                 children: [
                                   Image.network(
                                     value.product.data?.thumbnail ?? "",
+                                    height: 300,
+                                    width: 300,
                                   ),
                                   const SizedBox(height: 10),
                                   Text(value.product.data?.description ?? ""),
