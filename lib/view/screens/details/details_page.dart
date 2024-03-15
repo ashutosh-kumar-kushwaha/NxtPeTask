@@ -29,64 +29,62 @@ class _DetailsPageState extends State<DetailsPage> {
         child: Consumer<ProductDetailsViewModel>(
           builder: (context, value, _) {
             return Scaffold(
-                resizeToAvoidBottomInset: false,
-                appBar: AppBar(
-                  title: Text(value.product.data?.title ?? "",
-                      style: const TextStyle(color: Colors.white)),
-                  centerTitle: true,
-                  backgroundColor: Theme.of(context).primaryColor,
-                ),
-                body: SingleChildScrollView(
-                  child: (value.product.status == Status.LOADING)
-                      ? const Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : (value.product.status == Status.SUCCESS)
-                          ? Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Image.network(
-                                    value.product.data?.thumbnail ?? "",
-                                    height: 300,
-                                    width: 300,
-                                  ),
-                                  const SizedBox(height: 10),
-                                  Text(value.product.data?.description ?? ""),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                      "Price: \$${value.product.data?.price.toString()}"),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                      "Category: ${value.product.data?.category}"),
-                                  const SizedBox(height: 50),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      ElevatedButton(
-                                          onPressed: () {
-                                            buyProduct();
-                                          },
-                                          child: const Text("Buy Product")),
-                                    ],
-                                  )
-                                ],
+              appBar: AppBar(
+                title: Text(value.product.data?.title ?? "",
+                    style: const TextStyle(color: Colors.white)),
+                centerTitle: true,
+                backgroundColor: Theme.of(context).primaryColor,
+              ),
+              body: (value.product.status == Status.LOADING)
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : (value.product.status == Status.SUCCESS)
+                      ? SingleChildScrollView(
+                          child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Image.network(
+                                value.product.data?.thumbnail ?? "",
+                                height: 300,
+                                width: 300,
                               ),
-                            )
-                          : Center(
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                  Text(value.product.message.toString()),
+                              const SizedBox(height: 10),
+                              Text(value.product.data?.description ?? ""),
+                              const SizedBox(height: 10),
+                              Text(
+                                  "Price: \$${value.product.data?.price.toString()}"),
+                              const SizedBox(height: 10),
+                              Text("Category: ${value.product.data?.category}"),
+                              const SizedBox(height: 50),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
                                   ElevatedButton(
                                       onPressed: () {
-                                        viewModel.getProductDetails(widget.id);
+                                        buyProduct();
                                       },
-                                      child: const Text("Reload"))
-                                ])),
-                ));
+                                      child: const Text("Buy Product")),
+                                ],
+                              )
+                            ],
+                          ),
+                        ))
+                      : Center(
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                              Text(value.product.message.toString()),
+                              ElevatedButton(
+                                  onPressed: () {
+                                    viewModel.getProductDetails(widget.id);
+                                  },
+                                  child: const Text("Reload"))
+                            ])),
+            );
           },
         ));
   }
