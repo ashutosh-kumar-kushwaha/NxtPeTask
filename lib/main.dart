@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:next_pe_task/view/screens/routes.dart';
-import 'package:next_pe_task/view/screens/routes_name.dart';
+import 'package:next_pe_task/utils/router_config.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,10 +8,9 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: ThemeData(primaryColor: Colors.purple[900]),
-      initialRoute: RoutesName.listing,
-      onGenerateRoute: Routes.generateRoute,
+      routerConfig: GoRouterConfig.router,
     );
   }
 }
