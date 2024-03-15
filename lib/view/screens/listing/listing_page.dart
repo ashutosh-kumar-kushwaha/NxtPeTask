@@ -41,39 +41,43 @@ class _ListingPageState extends State<ListingPage> {
                       child: CircularProgressIndicator(),
                     );
                   case Status.SUCCESS:
-                    return ListView.builder(
-                      itemCount: value.products.data?.products?.length,
-                      itemBuilder: (context, index){
-                        return Card(
-                          child: ListTile(
-                            leading: Image.network(
-                              value.products.data?.products![index].images![0].toString() as String,
-                              height: 40,
-                              width: 40,
-                              fit: BoxFit.cover,
+                    return RefreshIndicator(
+                      onRefresh: ()=> listingViewModel.getProducts(),
+                      child: ListView.builder(
+                        itemCount: value.products.data?.products?.length,
+                        itemBuilder: (context, index){
+                          return Card(
+                            child: ListTile(
+                              leading: Image.network(
+                                value.products.data?.products![index].thumbnail?? "",
+                                height: 40,
+                                width: 40,
+                                fit: BoxFit.cover,
+                                ),
+                              title: Text(value.products.data?.products![index].title?? ""),
+                              subtitle: Text("\$${value.products.data?.products![index].price.toString()}"),
+                              trailing: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(value.products.data?.products![index].rating.toString()?? ""),
+                                  const Icon(Icons.star, color: Colors.grey)
+                                ],
                               ),
-                            title: Text(value.products.data?.products![index].title.toString() as String),
-                            subtitle: Text("\$${value.products.data?.products![index].price.toString()}"),
-                            trailing: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text(value.products.data?.products![index].rating.toString() as String),
-                                const Icon(Icons.star, color: Colors.grey)
-                              ],
-                            ),
-                            onTap: () {
-                              context.goNamed("${RoutesName.details}",pathParameters: {
-                                "id":"${value.products.data!.products![index].id}"
-                              });
-                            },
-                          )
-                        );
-                      }
+                              onTap: () {
+                                context.goNamed(RoutesName.details,pathParameters: {
+                                  "id":"${value.products.data!.products![index].id}"
+                                });
+                              },
+                            )
+                          );
+                        }
+                      ),
                     );
-                  case Status.ERROR:
-                    return Text(value.products.message.toString());
                   
-                  case null: return Container();
+                  default: 
+                    return Center(
+                      child: Text(value.products.message.toString())
+                    );
                 }
               },
             )

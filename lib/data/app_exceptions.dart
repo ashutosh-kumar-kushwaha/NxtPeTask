@@ -23,3 +23,9 @@ class BadRequestException extends AppException {
   BadRequestException([String? message]) : super(message, "Invalid Request");
 
 }
+
+class NotFoundException extends AppException {
+
+  NotFoundException([String? message]) : super(message, "Not Found: ");
+
+}

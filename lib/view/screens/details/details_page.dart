@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:next_pe_task/data/response/status.dart';
+import 'package:next_pe_task/utils/platform_helper.dart';
 import 'package:next_pe_task/view_model/product_detail_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -28,33 +29,50 @@ class _DetailsPageState extends State<DetailsPage> {
           create: (BuildContext context) => viewModel,
           child: Consumer<ProductDetailsViewModel>(
               builder: (context, value, _){
-                switch (value.product.status){
-                  case Status.LOADING:
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  case Status.SUCCESS:
-                    return Scaffold(
+                return Scaffold(
                       appBar: AppBar(
                         title: Text(value.product.data?.title?? "", style: const TextStyle(color: Colors.white)),
                         centerTitle: true,
                         backgroundColor: Theme.of(context).primaryColor,
                       ),
-                      body: Column(
+                      body:  (value.product.status == Status.LOADING)?
+                     const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                 : (value.product.status == Status.SUCCESS)?
+                    Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Image.network(value.product.data?.images![0]?? ""),
-                          ElevatedButton(onPressed: () {}, child: Text("Buy"))
+                          Image.network(
+                            value.product.data?.thumbnail?? "",
+                            height: 300,
+                            width: 300,
+                            ),
+                            Text(value.product.data?.title?? "", style: const TextStyle(color: Colors.white)),
+                            Text(value.product.data?.description?? "", style: const TextStyle(color: Colors.white)),
+                            Text(value.product.data?.price.toString()?? "", style: const TextStyle(color: Colors.white)),
+                            Text(value.product.data?.category?? "", style: const TextStyle(color: Colors.white)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ElevatedButton(onPressed: () {
+                                buyProduct();
+                              }, child: const Text("Buy Product")),
+                            ],
+                          )
                         ],
-
-                      )
+                      ):
+               Center(
+                      child: Text(value.product.message.toString())
+                    )
+                
+                      
+                      
+                      
+                     
                     );
-                  case Status.ERROR:
-                    return Text(value.product.message.toString());
-                  
-                  case null: return Container();
-                }
+               
               },
             )
         );

@@ -32,6 +32,9 @@ class NetworkApiService extends BaseApiService{
       case 400: 
         throw BadRequestException(response.body.toString());
 
+      case 404:
+       throw NotFoundException("Invalid Product Id");
+
       default: 
         throw FetchDataException("Error occured while communicating with server with status code: ${response.statusCode}");
     }

@@ -18,7 +18,7 @@ class MainActivity: FlutterActivity(){
                     buyProduct()
                     result.success(null)
                 } else {
-                    result.notImplemented()
+                    result.notImplemented()6
                 }
             }
     }
