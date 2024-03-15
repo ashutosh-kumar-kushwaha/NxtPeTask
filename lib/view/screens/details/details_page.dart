@@ -41,9 +41,13 @@ class _DetailsPageState extends State<DetailsPage> {
                         backgroundColor: Theme.of(context).primaryColor,
                       ),
                       body: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image.network(value.product.data?.images![0]?? "")
+                          Image.network(value.product.data?.images![0]?? ""),
+                          ElevatedButton(onPressed: () {}, child: Text("Buy"))
                         ],
+
                       )
                     );
                   case Status.ERROR:
