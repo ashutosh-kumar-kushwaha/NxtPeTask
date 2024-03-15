@@ -10,7 +10,7 @@ class ApiResponse<T>{
 
   ApiResponse.loading() : status = Status.LOADING;
 
-  ApiResponse.completed(this.data) : status = Status.COMPLETED;
+  ApiResponse.success(this.data) : status = Status.SUCCESS;
 
   ApiResponse.error(this.message) : status = Status.ERROR;
   

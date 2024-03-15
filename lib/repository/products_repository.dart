@@ -1,7 +1,7 @@
 import 'package:next_pe_task/data/network/app_url.dart';
 import 'package:next_pe_task/data/network/base_api_service.dart';
 import 'package:next_pe_task/data/network/network_api_service.dart';
-import 'package:next_pe_task/models/product_list';
+import 'package:next_pe_task/models/product_list.dart';
 
 class ProductsRepository {
 

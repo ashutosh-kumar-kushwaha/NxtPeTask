@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:next_pe_task/presentation/ui/routes.dart';
-import 'package:next_pe_task/presentation/ui/routes_name.dart';
+import 'package:next_pe_task/view/screens/routes.dart';
+import 'package:next_pe_task/view/screens/routes_name.dart';
 
 void main() {
   runApp(MyApp());

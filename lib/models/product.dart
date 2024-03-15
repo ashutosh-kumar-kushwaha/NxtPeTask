@@ -1,4 +1,5 @@
-class Products {
+
+class Product {
   int? id;
   String? title;
   String? description;
@@ -11,7 +12,7 @@ class Products {
   String? thumbnail;
   List<String>? images;
 
-  Products(
+  Product(
       {this.id,
       this.title,
       this.description,
@@ -24,7 +25,7 @@ class Products {
       this.thumbnail,
       this.images});
 
-  Products.fromJson(Map<String, dynamic> json) {
+  Product.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     description = json['description'];

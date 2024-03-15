@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../data/response/status.dart';
 import '../../../view_model/listing_view_model.dart';
 
 
@@ -32,7 +33,26 @@ class _ListingPageState extends State<ListingPage> {
           create: (BuildContext context) => listingViewModel,
           child: Consumer<ListingViewModel>(
               builder: (context, value, _){
-                return Container();
+                switch (value.products.status){
+                  case Status.LOADING:
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  case Status.SUCCESS:
+                    return ListView.builder(
+                      itemBuilder: (context, index){
+                        return Card(
+                          child: ListTile(
+                            title: Text(value.products.data?.products![index].title.toString() as String),
+                          )
+                        );
+                      }
+                    );
+                  case Status.ERROR:
+                    return Text(value.products.message.toString());
+                  
+                  case null: return Container();
+                }
               },
             )
         )
