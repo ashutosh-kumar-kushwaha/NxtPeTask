@@ -17,7 +17,7 @@ class GoRouterConfig {
         name: RoutesName.details,
         path: 'details/:id',
         pageBuilder: (context, state) {
-          final id = state.path;
+          final id = state.pathParameters['id'];
           return MaterialPage(child: DetailsPage(id: id!));
         },
       ),]

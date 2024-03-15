@@ -62,7 +62,7 @@ class _ListingPageState extends State<ListingPage> {
                               ],
                             ),
                             onTap: () {
-                              context.pushNamed("${RoutesName.details}",pathParameters: {
+                              context.goNamed("${RoutesName.details}",pathParameters: {
                                 "id":"${value.products.data!.products![index].id}"
                               });
                             },
