@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:next_pe_task/utils/routes_name.dart';
 import 'package:provider/provider.dart';
 import '../../../data/response/status.dart';
 import '../../../view_model/listing_view_model.dart';
@@ -59,6 +61,11 @@ class _ListingPageState extends State<ListingPage> {
                                 const Icon(Icons.star, color: Colors.grey)
                               ],
                             ),
+                            onTap: () {
+                              context.pushNamed("${RoutesName.details}",pathParameters: {
+                                "id":"${value.products.data!.products![index].id}"
+                              });
+                            },
                           )
                         );
                       }
